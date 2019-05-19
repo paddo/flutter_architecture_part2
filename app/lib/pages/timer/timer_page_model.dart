@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
+import 'package:time_tracking/core/backend_service.dart';
+import 'package:time_tracking/core/service_locator.dart';
 
 class TimerPageModel {
   final Stopwatch _stopWatch;
@@ -20,9 +22,9 @@ class TimerPageModel {
 
   _timerElapsed(Timer timer) {
     final elapsedTime = _stopWatch.elapsed * speedMultiplier;
-    if(elapsedTime.inSeconds != duration.value.inSeconds) seconds.add((elapsedTime.inSeconds % 60) / 60.0);
-    if(elapsedTime.inMinutes != duration.value.inMinutes) minutes.add((elapsedTime.inMinutes % 60) / 60.0);
-    if(elapsedTime.inHours != duration.value.inHours) hours.add(elapsedTime.inHours / 24.0);
+    if (elapsedTime.inSeconds != duration.value.inSeconds) seconds.add((elapsedTime.inSeconds % 60) / 60.0);
+    if (elapsedTime.inMinutes != duration.value.inMinutes) minutes.add((elapsedTime.inMinutes % 60) / 60.0);
+    if (elapsedTime.inHours != duration.value.inHours) hours.add(elapsedTime.inHours / 24.0);
     duration.add(elapsedTime);
   }
 
@@ -38,6 +40,7 @@ class TimerPageModel {
   }
 
   reset() {
+    if(duration.value != Duration.zero) sl<BackendService>().addToHistory(duration.value);
     _stopWatch.reset();
     if (_timer != null) _timer.cancel();
     duration.add(Duration.zero);
