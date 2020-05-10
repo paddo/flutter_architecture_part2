@@ -26,9 +26,9 @@ Widget timerPage() {
                 color: Color(0xFF363E66),
               ),
             ),
-            ProgressIndicator(model.seconds, shortestSide * 0.6, shortestSide * 0.05, Color(0xFF859DC1)),
-            ProgressIndicator(model.minutes, shortestSide * 0.7, shortestSide * 0.05, Color(0xFF82BDBF)),
-            ProgressIndicator(model.hours, shortestSide * 0.8, shortestSide * 0.05, Color(0xFFB8D6E1)),
+            CustomProgressIndicator(model.seconds, shortestSide * 0.6, shortestSide * 0.05, Color(0xFF859DC1)),
+            CustomProgressIndicator(model.minutes, shortestSide * 0.7, shortestSide * 0.05, Color(0xFF82BDBF)),
+            CustomProgressIndicator(model.hours, shortestSide * 0.8, shortestSide * 0.05, Color(0xFFB8D6E1)),
             TimerText(model.duration),
           ],
         ),
@@ -46,7 +46,7 @@ Widget timerPage() {
 }
 
 @widget
-Widget progressIndicator(BehaviorSubject<double> subject, double diameter, double strokeWidth, Color color) {
+Widget customProgressIndicator(BehaviorSubject<double> subject, double diameter, double strokeWidth, Color color) {
   return Container(
     height: diameter,
     width: diameter,
@@ -67,6 +67,6 @@ Widget timerText(BehaviorSubject<Duration> subject) {
 
   return Text(
     '$hours:$minutes:$seconds',
-    style: Theme.of(useContext()).textTheme.headline,
+    style: Theme.of(useContext()).textTheme.headline5,
   );
 }

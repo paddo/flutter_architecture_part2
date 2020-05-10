@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:time_tracking/pages/history/history_page.dart';
 import 'package:time_tracking/pages/timer/timer_page.dart';
+import 'package:time_tracking/pages/history/history_page.dart';
 
 class NavItem {
   final IconData icon;
